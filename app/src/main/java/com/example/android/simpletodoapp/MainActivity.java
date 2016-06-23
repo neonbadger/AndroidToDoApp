@@ -1,5 +1,6 @@
 package com.example.android.simpletodoapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -9,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.apache.commons.io.FileUtils;
 
@@ -20,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> items;
     ArrayAdapter<String> itemsAdapter;
     ListView lvItems;
+    EditText etNewItem;
+    int pos;
+    private final int REQUEST_CODE = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +72,23 @@ public class MainActivity extends AppCompatActivity {
         writeItems();
     }
 
+
     private void setupListViewListener() {
+        lvItems.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent i = new Intent(MainActivity.this, EditItemActivity.class);
+                        pos = position;
+                        i.putExtra("itemList", items.get(position));
+                        items.remove(pos);
+                        startActivityForResult(i, REQUEST_CODE);
+
+                    }
+                }
+        );
+
         lvItems.setOnItemLongClickListener(
                 new AdapterView.OnItemLongClickListener() {
 
@@ -79,8 +100,13 @@ public class MainActivity extends AppCompatActivity {
                         writeItems();
                         return true;
                     }
-                });
+                }
+
+        );
+
     }
+
+
 
     private void readItems() {
         File filesDir = getFilesDir();
@@ -101,4 +127,17 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+
+    protected void onActivityResult(int requestCode,
+                                    int resultCode,
+                                    Intent data) {
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+            String name = data.getExtras().getString("itemList");
+            items.add(pos, name);
+            itemsAdapter.notifyDataSetChanged();
+            Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }
