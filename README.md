@@ -32,13 +32,14 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://imgur.com/FvJTMsI' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+![](http://imgur.com/FvJTMsI)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+* Encountered some difficulty with initial Android Studio setup and connecting to Emulator.
+* Need to install command line gradle and abd for easier debugging.
 
 ## License
 
