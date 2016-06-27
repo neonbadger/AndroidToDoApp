@@ -32,9 +32,9 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-![](http://i.imgur.com/FvJTMsI.gifv)
+![](ToDoApp.gif)
 
-GIF created with [LiceCap](http://www.cockos.com/licecap/).
+The GIF is also available on [imgur](http://i.imgur.com/FvJTMsI.gifv). GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
